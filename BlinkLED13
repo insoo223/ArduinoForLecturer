@@ -1,24 +1,52 @@
-/*
-  Blink 한글  
-  Turns on an LED on for an half second, then off for an half second, repeatedly.
+/**************************************
+* 대상장치: 아두이노 우노
+* 코드이름: BlinkLED13.ino
+* 작성자: 김인수 (insoo@hotmail.com)
+* 최초 생성일: 2014.11.24
+* 최종 수정일: 2015.4.14
+* 코드크기[바이트]: 1090
+* 설명: 아두이노 보드의 D13포트에 연결된 "L" LED를 0.5초 간격으로 깜박인다.
+* 수정이유: 
+  2015.4.14 영어로 된 주석을 한글로 서술함
+  2014.11.24 아두이노 첫 실험위한 코딩
+* 참조: 아두이노 공식 학습 사이트
+	http://arduino.cc/en/Tutorial/Blink
+**************************************/
  
-  This example code is in the public domain.
- */
- 
-// Pin 13 has an LED connected on most Arduino boards.
-// give it a name:
-int led = 13;
+// 아두이노 보드의 D13포트에 연결된 LED를 "BoardLED"로 이름 부릅시다.
+// 그리고, 이름을 담는 그릇 또는 명찰을 아두이노는 "변수"라고 합니다.
+// 변수는 나타내고자 하는 값을 담는 그릇이고, 어떤 종류의 값을 표현할 수 있는지
+// 그 종류를 미리 말해 줘야 합니다. 
+// 여기서, "BoardLED"는 정수값을 나타낼 수 있다고 선언하기 때문에 "int"라고 변수의 종류를 지정했습니다. 
+// int는 정수를 나타내는 영어 "integer"의 준말입니다. 
+int BoardLED = 13;
 
-// the setup routine runs once when you press reset:
-void setup() {                
-  // initialize the digital pin as an output.
-  pinMode(led, OUTPUT);    
-}
+//시작함수 setup 이 맨 먼저 실행됩니다.
+void setup() 
+{                
+  //"BoardLED"라는 변수가 나타내는 것은 D13포트이고, 
+  //이를 출력모드로 지정합니다. 
+  //이때, 출력은 아두이노가 D13포트를 통해 
+  //1(HIGH, 5V, 3.3V) 또는 0 (LOW, 0V)의 전압신호를 보낸다는 의미 입니다.
+  pinMode(BoardLED, OUTPUT);      
+}//setup
 
-// the loop routine runs over and over again forever:
-void loop() {
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(500);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
-  delay(500);               // wait for a second
-}
+//동작함수 loop는 계속 실행됩니다.
+void loop() 
+{
+  //"BoardLED" 즉, D13포트를 HIGH로 합니다.
+  digitalWrite(BoardLED, HIGH);   
+  
+  //그리고, 1000분의 500초 (500 밀리초)만큼 기다립니다.
+  delay(500);               
+  
+  //"BoardLED" 즉, D13포트를 LOW로 합니다.
+  digitalWrite(BoardLED, LOW);    
+  
+  //그리고, 1000분의 500초 (500 밀리초)만큼 기다립니다.
+  delay(500);
+
+  //이제 동작함수 loop가 할 일은 다 했지만, 
+  //loop의 처음으로 돌아가서 다시 일을 시작합니다. 
+  //전원공급을 끊을 때 까지 계속... 열심히 영차!
+}//loop
