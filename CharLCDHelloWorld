@@ -1,0 +1,68 @@
+/*
+  LiquidCrystal Library - Hello World
+ 첫 줄에 hello, world! 둘째 줄에 hi, Insoo! 를 표시하고, 경과시간을 초로 표시한다.
+ 
+ Demonstrates the use a 16x2 LCD display.  The LiquidCrystal
+ library works with all LCD displays that are compatible with the 
+ Hitachi HD44780 driver. There are many of them out there, and you
+ can usually tell them by the 16-pin interface.
+ 
+ This sketch prints "Hello World!" to the LCD
+ and shows the time.
+ 
+  The circuit:
+ * LCD RS pin to digital pin 12 --> 8
+ * LCD Enable pin to digital pin 11 --> 9
+ * LCD D4 pin to digital pin 5 --> 4
+ * LCD D5 pin to digital pin 4 --> 5
+ * LCD D6 pin to digital pin 3 --> 6
+ * LCD D7 pin to digital pin 2 --> 7
+ * LCD R/W pin to ground
+ * LCD VSS pin to ground
+ * LCD VCC pin to 5V
+ * 10K resistor:
+ * ends to +5V and ground
+ * wiper to LCD VO pin (pin 3)
+ 
+ Library originally added 18 Apr 2008
+ by David A. Mellis
+ library modified 5 Jul 2009
+ by Limor Fried (http://www.ladyada.net)
+ example added 9 Jul 2009
+ by Tom Igoe
+ modified 22 Nov 2010
+ by Tom Igoe
+ 
+ This example code is in the public domain.
+
+ http://www.arduino.cc/en/Tutorial/LiquidCrystal
+ */
+
+// include the library code:
+#include <LiquidCrystal.h>
+
+// initialize the library with the numbers of the interface pins
+
+// original code 공식웹사이트의 예제 코드의 LCD핀 연결정보
+//LiquidCrystal lcd(12, 11, 5, 4, 3, 2); 
+// ebay에서 구매한 보드의 핀 정보를 멀티테스터를 통해 확인한 후 코딩 수정함.
+LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
+
+void setup() {
+  // set up the LCD's number of columns and rows: 
+  lcd.begin(16, 2);
+  lcd.setCursor(0, 0);
+  // Print a message to the LCD.
+  lcd.print("hello, world!");
+
+  lcd.setCursor(0, 1);
+  lcd.print("hi, Insoo!");
+}
+
+void loop() {
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.setCursor(12, 1);
+  // print the number of seconds since reset:
+  lcd.print(millis()/1000);
+}
