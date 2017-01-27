@@ -33,4 +33,4 @@ void loop() {
     digitalWrite(i, LOW);    // turn the LED off by making the voltage LOW
     delay(BlinkInterval);               // wait for a second
   }
-}
+} 
