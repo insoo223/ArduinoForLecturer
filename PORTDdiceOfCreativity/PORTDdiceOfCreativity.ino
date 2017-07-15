@@ -2,12 +2,14 @@
   Target MCU: Arduino Uno R3
   Clock type: External
   Clock speed: 16Mhz
-  Name    : PORTDbuttonCnt.ino
+  Name    : PORTDdiceOfCreativity.ino
   Author  : Insoo Kim (insoo@hotmail.com)
   Date    : Dec 26, 2014
   Update  : Mon Aug 10, 2015
             Sat Jul 15, 2017 - Put more comments to lecture 
   Desc    : 
+    0) Play dice of creativity!
+    
     1) Use PORTD of group name of IO pins
     Digital IO pin of Arduino from 1 to, 7 is member of PORTD of ATmega328P MCU.
 
@@ -27,34 +29,35 @@
   LICENSE: GNU General Public License, version 3 (GPL-3.0)
 *****************************************************************/  
 
-#define BUTTONpin 13
-#define DISP_LED_STARTpin 2
-#define DISP_LED_Endpin 7
-
-int cnt;
+#define SWpin 13
+#define startLEDpin 2
+#define endLEDpin 7
 
 void setup()
 {
-  int i;
-  for (i=DISP_LED_STARTpin; i<=DISP_LED_Endpin; i++)
+  byte i;
+  for (i=startLEDpin; i<=endLEDpin; i++)
     pinMode(i, OUTPUT);
-
-  pinMode(BUTTONpin, INPUT); // the start button
+  pinMode(SWpin, INPUT);
 }//setup
 
-void loop()
+void loop ()
 {
-  if (digitalRead(BUTTONpin) == LOW)
+  byte i;
+
+  if (digitalRead(SWpin) == LOW) // pull-up resistored switch
   {
-    delay(200); // for debounce
-    cnt++;
-    //Show button count from the LED of Pin3
-    //Digital pin0 to 7 is grouped as PORTD
-    //PORTD = cnt <<3;
-    PORTD = cnt << DISP_LED_STARTpin;
+    PORTD = analogRead(A0) % 127 << 2;
+    delay(3000);
+  }//if (digitalRead(SWpin) == LOW)
+  else
+    for (i=startLEDpin; i<=endLEDpin; i++)
+    {
+      digitalWrite(i, HIGH);
+      delay(10);
+      digitalWrite(i, LOW);
+      delay(10);
+    }//for i
     
-    //Digital pin8 to 13 is grouped as PORTB
-    //Show button count at PORTB LEDs, if the count is over 2^5
-    //PORTB = cnt >>5;
-  }//if
+  delay(10);
 }//loop
