@@ -1,12 +1,29 @@
+/**************************************************************
+  Target MCU: Arduino Uno R3
+  Clock type: External
+  Clock speed: 16Mhz
+  Name    : CharLCDReadButton.ino
+  Author  : Insoo Kim (insoo@hotmail.com)
+  Date    : Dec 12, 2014
+  Update  : Mon Aug 10, 2015
+            Sat Jul 15, 2017 - Put more comments to lecture 
+  Desc    : 
+    1) Use 16 by 2 character LCD shield.
+    Pins 4, 5, 6, 7, 8, 9 and 10 are used to interface with the LCD. 
+    Just one Analog Pin 0 is used to read the five pushbuttons. 
+
+    2) Use <LiquidCrystal> library. 
+    Works with all LCD displays that are compatible with the Hitachi HD44780 driver.    
+
+    3) 1st line: "Push the buttons "
+       2nd line: initially "NONE: " & time tick, when press buttons show corresponding mesages
+    
+  Ref:
+    
+  LICENSE: GNU General Public License, version 3 (GPL-3.0)
+*****************************************************************/  
 //Sample using LiquidCrystal library
 #include <LiquidCrystal.h>
-
-/*******************************************************
-
-This program will test the LCD panel and the buttons
-Mark Bramwell, July 2010
-
-********************************************************/
 
 // select the pins used on the LCD panel
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
@@ -38,7 +55,6 @@ void loop()
 {
  lcd.setCursor(9,1);            // move cursor to second line "1" and 9 spaces over
  lcd.print(millis()/1000);      // display seconds elapsed since power-up
-
 
  lcd.setCursor(0,1);            // move to the begining of the second line
  lcd_key = read_LCD_buttons();  // read the buttons

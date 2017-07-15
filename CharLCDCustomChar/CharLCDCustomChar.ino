@@ -1,48 +1,47 @@
-/*
-  LiquidCrystal Library - Custom Characters
- 
- Demonstrates how to add custom characters on an LCD  display.  
- The LiquidCrystal library works with all LCD displays that are 
- compatible with the  Hitachi HD44780 driver. There are many of 
- them out there, and you can usually tell them by the 16-pin interface.
- 
- This sketch prints "I <heart> Arduino!" and a little dancing man
- to the LCD.
- 
-  The circuit:
- * LCD RS pin to digital pin 12
- * LCD Enable pin to digital pin 11
- * LCD D4 pin to digital pin 5
- * LCD D5 pin to digital pin 4
- * LCD D6 pin to digital pin 3
- * LCD D7 pin to digital pin 2
- * LCD R/W pin to ground
- * 10K potentiometer:
- * ends to +5V and ground
- * wiper to LCD VO pin (pin 3)
- * 10K poterntiometer on pin A0
- 
- created 21 Mar 2011
- by Tom Igoe
- modified 11 Nov 2013
- by Scott Fitzgerald
- 
- Based on Adafruit's example at
- https://github.com/adafruit/SPI_VFD/blob/master/examples/createChar/createChar.pde
- 
- This example code is in the public domain.
- http://www.arduino.cc/en/Tutorial/LiquidCrystal
- 
- Also useful:
- http://icontexto.com/charactercreator/
- 
- */
+/**************************************************************
+  Target MCU: Arduino Uno R3
+  Clock type: External
+  Clock speed: 16Mhz
+  Name    : CharLCDCustomChar.ino
+  Author  : Insoo Kim (insoo@hotmail.com)
+  Date    : Dec 12, 2014
+  Update  : Mon Aug 10, 2015
+            Sat Jul 15, 2017 - Put more comments to lecture 
+  Desc    : 
+    1) Use 16 by 2 character LCD shield.
+    Pins 4, 5, 6, 7, 8, 9 and 10 are used to interface with the LCD. 
+    Just one Analog Pin 0 is used to read the five pushbuttons. 
 
-// include the library code:
+    2) Use <LiquidCrystal> library. 
+    Works with all LCD displays that are compatible with the Hitachi HD44780 driver.    
+    lcd.createChar
+    
+    3) 1st line: smiley, frownie, armsdown, armsup, heart
+       2nd line: armsdown, armsup animation
+
+ The circuit:
+     * LCD RS pin to digital pin 8
+     * LCD Enable pin to digital pin 9
+     * LCD D4 pin to digital pin 4
+     * LCD D5 pin to digital pin 5
+     * LCD D6 pin to digital pin 6
+     * LCD D7 pin to digital pin 7
+     * LCD R/W pin to ground
+     * LCD VSS pin to ground
+     * LCD VCC pin to 5V
+     * 10K resistor:
+     * ends to +5V and ground
+     * wiper to LCD VO pin (pin 3)
+    
+  Ref:
+    http://www.shieldlist.org/dfrobot/lcd
+    https://www.dfrobot.com/wiki/index.php/Arduino_LCD_KeyPad_Shield_(SKU:_DFR0009) 
+    http://www.arduino.cc/en/Tutorial/LiquidCrystal
+    
+  LICENSE: GNU General Public License, version 3 (GPL-3.0)
+*****************************************************************/  
 #include <LiquidCrystal.h>
 
-// initialize the library with the numbers of the interface pins
-//LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // original code
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 // make some custom characters:
@@ -55,7 +54,7 @@ byte heart[8] = {
   0b01110,
   0b00100,
   0b00000
-};
+};//heart[8]
 
 byte smiley[8] = {
   0b00000,
@@ -66,7 +65,7 @@ byte smiley[8] = {
   0b10001,
   0b01110,
   0b00000
-};
+};//smiley[8]
 
 byte frownie[8] = {
   0b00000,
@@ -77,7 +76,7 @@ byte frownie[8] = {
   0b00000,
   0b01110,
   0b10001
-};
+};//frownie[8]
 
 byte armsDown[8] = {
   0b00100,
@@ -88,7 +87,7 @@ byte armsDown[8] = {
   0b10101,
   0b00100,
   0b01010
-};
+};//armsDown[8]
 
 byte armsUp[8] = {
   0b00100,
@@ -99,7 +98,7 @@ byte armsUp[8] = {
   0b00100,
   0b00100,
   0b01010
-};
+};//armsUp[8]
 
 void setup() {
   // initialize LCD and set up the number of columns and rows: 
@@ -123,9 +122,10 @@ void setup() {
   lcd.print(" Arduino! ");
   lcd.write(1);
 
-}
+}//setup
 
-void loop() {
+void loop() 
+{
   // read the potentiometer on A0:
   int sensorReading = analogRead(A0);
   // map the result to 200 - 1000:
@@ -170,4 +170,4 @@ void loop() {
   // draw him arms up:
   lcd.write(4);
   delay(delayTime); 
-}
+}//loop
